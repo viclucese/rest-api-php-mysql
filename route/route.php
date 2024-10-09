@@ -17,9 +17,10 @@
     } else {
         if(count(array_filter($arrayRutas)) == 2) { 
             if(array_filter($arrayRutas)[2] == "cursos") {
-                $json = array("detalle"=>"estas en la vista cursos");
-                echo json_encode($json,true);
-                return;
+                if(isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] == "POST"){
+                    $cursos = new ControladorCursos();
+                    $cursos->index();
+                }
             }
             if(array_filter($arrayRutas)[2] == "registro") {
                 $json = array("detalle"=>"estas en la vista registro");
