@@ -16,7 +16,15 @@
         return;
     } else {
         if(count(array_filter($arrayRutas)) == 2) { 
+
+            /*
+            Peticiones de cursos
+            */
             if(array_filter($arrayRutas)[2] == "cursos") {
+
+                /*
+                    Petición POST
+                */
                 if(isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] == "POST"){
                     $cursos = new ControladorCursos();
                     $cursos->create();
@@ -27,7 +35,9 @@
             }
 
             if(array_filter($arrayRutas)[2] == "registro") {
-                if(isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] == "GET"){
+                if(isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] == "POST"){
+                    $datos = array("nombre"=>$_POST["nombre"],"apellido"=>$_POST["apellido"],"email"=>$_POST["email"]);
+                    print_r($datos);
                     $clientes = new ControladorClientes();
                     $clientes->create();
                 }
