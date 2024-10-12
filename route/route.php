@@ -34,12 +34,21 @@
                 }
             }
 
+            /**
+             * Peticiones de clientes/registros
+             * 
+             */
+
+             /**
+              * POST a clientes
+              */
+
             if(array_filter($arrayRutas)[2] == "registro") {
                 if(isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] == "POST"){
                     $datos = array("nombre"=>$_POST["nombre"],"apellido"=>$_POST["apellido"],"email"=>$_POST["email"]);
-                    print_r($datos);
+                    //print_r($datos);
                     $clientes = new ControladorClientes();
-                    $clientes->create();
+                    $clientes->create($datos);
                 }
             }            
         } else {
