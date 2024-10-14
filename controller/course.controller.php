@@ -2,10 +2,35 @@
 
     class ControladorCursos{
         public function index(){
-            $cursos = ModeloCursos::index("cursos");
-            $json = array("GET"=>$cursos,);
-            echo json_encode($json,true);
-            return;
+
+            /**
+             * Validando credenciales
+             */
+            //así se recogen de un basic auth con php
+
+            $clientes =  ModeloClientes::index("clientes");
+
+            
+
+            if(isset($_SERVER['PHP_AUTH_USER']) && isset($_SERVER['PHP_AUTH_PW'])){
+                foreach ($clientes as $key => $value) {
+                    if(base64_encode($_SERVER['PHP_AUTH_USER'].":".$_SERVER['PHP_AUTH_PW']) ==
+                        base64_encode($value["id_cliente"].":".$value["llave_secreta"])){
+
+                            $cursos = ModeloCursos::index("cursos");
+                            $json = array("Statusllll"=>200,
+                                            "total_registros"=>count($cursos));
+                            echo json_encode($json,true);
+                            return;
+
+                    }
+                }
+                // $user = $_SERVER['PHP_AUTH_USER'];
+                // $pass = $_SERVER['PHP_AUTH_PW'];
+                
+            }
+
+            
         }
 
         public function create(){

@@ -77,7 +77,9 @@
              if($create == "ok"){
                 $json = array(
                         "Status"=>200,
-                        "Mensaje"=>"Cliente registrado correctamente"
+                        "Mensaje"=>"Cliente registrado correctamente",
+                        "id_cliente"=>$id_cliente,
+                        "llave_secreta"=>$llave_secreta
                     );
                 echo json_encode($json,true);
                 return;
