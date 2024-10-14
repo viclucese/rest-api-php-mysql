@@ -26,8 +26,17 @@
                     Petición POST
                 */
                 if(isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] == "POST"){
+                    $datos = array("titulo"=>$_POST['titulo'],
+                                    "descripcion"=>$_POST['descripcion'],
+                                    "instructor"=>$_POST['instructor'],
+                                    "imagen"=>$_POST['imagen'],
+                                    "precio"=>$_POST['precio']);
+
+                    echo "<pre>"; print_r($datos); echo "</pre>";
+
                     $cursos = new ControladorCursos();
-                    $cursos->create();
+                    $cursos->create($datos);
+
                 } else if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] == "GET") {
                     $cursos = new ControladorCursos();
                     $cursos->index();
